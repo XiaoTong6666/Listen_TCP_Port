@@ -1,27 +1,29 @@
 const net = require('net');
-
-// 获取命令行参数中的端口号
 const port = process.argv[2];
-
 if (!port) {
-  console.error('请提供一个端口号作为参数');
+  console.error('举个栗子🌰：node tcp.js 11451');
   process.exit(1);
 }
-
 const server = net.createServer((socket) => {
-  console.log('客户端已连接');
-
-  // 处理接收到的数据
+  console.log('啊~被入了');
   socket.on('data', (data) => {
-    console.log(`收到的数据：${data.toString()}`);
+    process.stdout.write(`弄进来的东西：${data.toString()}`);
   });
-
-  // 处理连接断开
   socket.on('end', () => {
-    console.log('客户端已断开连接');
+    console.log('呜呜呜，出去了');
+  });
+  socket.on('error', (err) => {
+    console.error('嗯？哥哥是用nmap把我入的嘛?呜呜呜为什么不用telnet');
   });
 });
-
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`我的口${port}已经有在用了，麻烦哥哥换一个吧qwq`);
+  } else {
+    console.error('嗯？这里有个错误哥哥要看嘛',err);
+  }
+  process.exit(1);
+});
 server.listen(port, () => {
-  console.log(`服务器正在监听端口 ${port}`);
+  console.log(`记住！请入我的${port}口`);
 });
