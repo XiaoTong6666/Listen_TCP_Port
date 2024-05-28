@@ -18,12 +18,12 @@ const server = net.createServer((socket) => {
 });
 server.on('error', (err) => {
   if (err.code === 'EADDRINUSE') {
-    console.error(`我的口${port}已经有在用了，麻烦哥哥换一个吧qwq`);
+    console.error(`我的${port}口已被用了呜呜X﹏X，麻烦哥哥换一个吧qwq`);
   } else {
-    console.error('嗯？这里有个错误哥哥要看嘛',err);
+    console.error('嗯？这里有个错误哥哥要看嘛喵~',err);
   }
   process.exit(1);
 });
 server.listen(port, () => {
-  console.log(`记住！请入我的${port}口`);
+  console.log(`哥哥记住了噢！请入我的${port}口`);
 });
